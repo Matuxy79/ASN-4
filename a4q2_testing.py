@@ -3,70 +3,15 @@
 #CMPT 145 CRN 27177
 #L16
 
-#copying the starter file
+#importing the starter file
 import Statistics as S
+import test_statistics as TS
 
-
-def close_enough(a, b, tolerance):
-    """
-    Purpose:
-        Check if 2 floating point values are close enough to 
-        be considered equal.  See the Addendum in the assignment!
-    Pre-Conditions:
-        :param a: a floating point value
-        :param b: a floating point value
-        :param tolerance: a small positive floating point value
-    Post-Conditions:
-        none
-    Return:
-        :return True if the difference between a and b is small
-    """
-    return abs(a - b) < tolerance
-
-
-#####################################################################
-# test Statistics.create()
-# We can't test the object's identity, and the attributes are private
-# The only thing we can do is check to see if the initial values are correct
-# This is indirect testing, and since we're using 2 methods in the test, 
-# it's a very limited form of integration testing.
-
-
-test_item = 'Statistics.create()'
-expected = 0
-reason = "Initial count value"
-
-# call the operation
-stats = S.Statistics()
-result = stats.count()
-
-if result != expected:
-    print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
-
-
-expected = 0
-reason = "Initial average value"
-
-# call the operation
-stats = S.Statistics()
-result = stats.mean()
-
-if result != expected:
-    print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
-
-
-
-
-#####################################################################
-# test Statistics.add()  
-# We can't test add() directly, so check add() + count()
-# these are integration tests
-
-
+#Test for statistics add and one negative value
 test_item = 'add() + count()'
-data_in = 0
+data_in = [-3]
 expected = 1
-reason = "Check count after one value added"
+reason = "Check count after adding a negative value"
 
 # call the operation
 stats = S.Statistics()
@@ -76,11 +21,56 @@ result = stats.count()
 if result != expected:
     print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
 
-
+#Tests for statistics add and multiple negative values
 test_item = 'add() + count()'
-data_in = [0, 0, 0, 0, 0]
+data_in = [-4,-7,-9]
+expected = 3
+reason = "Check count after multiple negative values are added"
+
+# call the operation
+stats = S.Statistics()
+for v in data_in:
+    stats.add(v)
+result = stats.count()
+
+if result != expected:
+    print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
+
+#Tests for statistics add and a mix of positive and negative values
+test_item = 'add() + count()'
+data_in = [-4,-7,-9,4,6]
 expected = 5
-reason = "Check count after 5 values added"
+reason = "Check count after multiple  and positive values are added"
+
+# call the operation
+stats = S.Statistics()
+for v in data_in:
+    stats.add(v)
+result = stats.count()
+
+if result != expected:
+    print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
+
+#Tests for float values
+test_item = 'add() + count()'
+data_in = [1.6]
+expected = 1
+reason = "Check count after a float value is added"
+
+# call the operation
+stats = S.Statistics()
+for v in data_in:
+    stats.add(v)
+result = stats.count()
+
+if result != expected:
+    print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
+
+#Tests for negative float values
+test_item = 'add() + count()'
+data_in = [-3.4]
+expected = 1
+reason = "Check count after a negative float value is added"
 
 # call the operation
 stats = S.Statistics()
@@ -92,39 +82,11 @@ if result != expected:
     print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
 
 
-
-
-
-
-#####################################################################
-# test Statistics.mean()
-
-
+# Test Statistics.mean() when zero is the only value
 test_item = 'add() + mean()'
-data_in = 0
-expected = 0
-reason = "Check average after one value added"
-
-# call the operation
-stats = S.Statistics()
-stats.add(data_in)
-result = stats.mean()
-
-# We shouldn't test the floating point values for equality, because or roundoff error
-# So use the close_enough() function.
-
-if not close_enough(expected, result, 0.0001):
-    print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
-
-
-#####################################################################
-# test Statistics.mean()
-
-
-test_item = 'add() + mean()'
-data_in = [0, 0, 0, 0, 0]
+data_in = [0]
 expected = 0.0
-reason = "Check average after 5 values added"
+reason = "Check average after zero is added"
 
 # call the operation
 stats = S.Statistics()
@@ -135,8 +97,21 @@ result = stats.mean()
 if not close_enough(expected, result, 0.0001):
     print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
 
+print('*** Test script completed ***')
 
+# Test Statistics.mean() when a negative integer is the only value
+test_item = 'add() + mean()'
+data_in = [0]
+expected = 0.0
+reason = "Check average after zero is added"
 
+# call the operation
+stats = S.Statistics()
+for v in data_in:
+    stats.add(v)
+result = stats.mean()
 
+if not close_enough(expected, result, 0.0001):
+    print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
 
 print('*** Test script completed ***')

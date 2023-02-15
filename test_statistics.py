@@ -144,8 +144,4 @@ result = stats.mean()
 if not close_enough(expected, result, 0.0001):
     print('Error in {}: expected {} but obtained {} -- {}'.format(test_item, expected, result, reason))
 
-
-
-
-
 print('*** Test script completed ***')

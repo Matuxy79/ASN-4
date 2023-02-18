@@ -2,3 +2,9 @@
 #11303324
 #CMPT 145 CRN 27177
 #L16
+
+Made changes to the first operation by removing the variages defined and replacing them with an empty list that I will use in the other operations
+
+In the add operation I removed the variables that calculate the average and moved them to other operations more relavent so that there is less confusion and cluster
+
+Changed the mean operation to use pythons built in functions for calculations

@@ -61,3 +61,4 @@ class Card:
         """
         total = sum(Card.value(card) for card in list_of_cards)
         return total / len(list_of_cards) if len(list_of_cards) > 0 else 0
+
